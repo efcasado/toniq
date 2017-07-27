@@ -1,5 +1,6 @@
 Toniq
 =======
+[![Travis](https://img.shields.io/travis/efcasado/toniq.svg?style=flat-square)](https://travis-ci.org/efcasado/toniq)
 
 Simple and reliable background job processing library for [Elixir](http://elixir-lang.org/).
 
