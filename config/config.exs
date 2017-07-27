@@ -6,7 +6,7 @@ if Mix.env == :test do
   # Using the second database /1 for tests, but pubsub still uses the regular database
   # due to limitations in :eredis.
   config :toniq,
-    redis_url: "redis://localhost:6379/1",
+    redis_url: "redis://localhost:6379/12",
     keepalive_interval: 50, # ms
     keepalive_expiration: 70, # ms
     takeover_interval: 100, # ms

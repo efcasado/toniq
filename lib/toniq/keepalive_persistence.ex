@@ -22,7 +22,7 @@ defmodule Toniq.KeepalivePersistence do
 
   def takeover_jobs(from_identifier, to_identifier) do
     redis
-    |> Exredis.query_pipe([
+    |> Redix.pipeline!([
       # Begin transaction
       ["MULTI"],
 
@@ -96,7 +96,7 @@ defmodule Toniq.KeepalivePersistence do
   end
 
   defp redis_query(query) do
-    redis |> Exredis.query(query)
+    redis |> Redix.command!(query)
   end
 
   defp redis do
@@ -106,8 +106,8 @@ defmodule Toniq.KeepalivePersistence do
 
   # This is not a API any production code should rely upon, but could be useful
   # info when debugging or to verify things in tests.
-  defp debug_info, do: %{ system_pid: System.get_pid,
-                          last_updated_at: system_time }
+  defp debug_info, do: :erlang.term_to_binary(%{ system_pid: System.get_pid,
+                          last_updated_at: system_time })
 
   # R17 version of R18's :erlang.system_time
   defp system_time, do: :timer.now_diff(:erlang.now, {0, 0, 0}) * 1000

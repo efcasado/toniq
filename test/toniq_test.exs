@@ -50,12 +50,12 @@ defmodule ToniqTest do
   setup do
     Toniq.JobEvent.subscribe
     Process.register(self, :toniq_test)
-    Process.whereis(:toniq_redis) |> Exredis.query([ "FLUSHDB" ])
+    Process.whereis(:toniq_redis) |> Redix.command!([ "FLUSHDB" ])
     on_exit &Toniq.JobEvent.unsubscribe/0
   end
 
   setup do
-    Process.whereis(:toniq_redis) |> Exredis.query([ "FLUSHDB" ])
+    Process.whereis(:toniq_redis) |> Redix.command!([ "FLUSHDB" ])
     Toniq.KeepalivePersistence.register_vm(Toniq.Keepalive.identifier)
     :ok
   end

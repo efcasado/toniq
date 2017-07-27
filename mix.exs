@@ -16,7 +16,7 @@ defmodule Toniq.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :uuid, :exredis],
+    [applications: [:logger, :uuid, :redix],
      mod: {Toniq, []}]
   end
 
@@ -31,7 +31,7 @@ defmodule Toniq.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:exredis, ">= 0.1.1"},
+      {:redix, "~> 0.6.1"},
       {:uuid, "~> 1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:retry, "~> 0.5.0", only: :test}
